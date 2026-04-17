@@ -29,7 +29,7 @@ public class Member {
             this.maxBooks = 2;
         } else if(membershipType.equals("Student")) {
             this.maxBooks = 3;
-        } else if(membershipType.equal("Faculty")) {
+        } else if(membershipType.equals("Faculty")) {
             this.maxBooks = 4;
         } else if(membershipType.equals("Premium")) {
             this.maxBooks = 5;

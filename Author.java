@@ -6,13 +6,11 @@ public class Author {
     private String firstName;
     private String lastName;
     private String middleInitial;
-    private int birthYear;
 
-    public Author(String firstName, String lastName, String middleInitial, int birthYear) {
+    public Author(String firstName, String lastName, String middleInitial) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleInitial = middleInitial;
-        this.birthYear = birthYear;
     }
 
     public String getFirstName() {
@@ -39,11 +37,9 @@ public class Author {
         this.middleInitial = middleInitial;
     }
 
-    public int getBirthYear() {
-        return birthYear;
-    }
-
-    public void setBirthYear(int birthYear) {
-        this.birthYear = birthYear;
+    @Override
+    public String toString() {
+        if(middleInitial != null) return firstName + " " + middleInitial + ". " + lastName;
+        return firstName + " " + lastName;
     }
 }

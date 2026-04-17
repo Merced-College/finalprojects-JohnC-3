@@ -1,0 +1,21 @@
+Title,Author,ISBN,Publication Year,Genre,Language
+The Corrections,Jonathan Franzen,9780312421274,2001,Fiction,English
+White Teeth,Zadie Smith,9780375703867,2000,Fiction,English
+2666,Roberto Bolano,9780312429218,2004,Fiction,Spanish
+Atonement,Ian McEwan,9780385721790,2001,Fiction,English
+Austerlitz,W. G. Sebald,9780375504839,2001,Fiction,German
+Never Let Me Go,Kazuo Ishiguro,9781400078776,2005,Fiction,English
+The Road,Cormac McCarthy,9780307265432,2006,Fiction,English
+The Amazing Adventures of Kavalier and Clay,Michael Chabon,9780312282998,2000,Fiction,English
+The Year of Magical Thinking,Joan Didion,9781400078431,2005,Nonfiction,English
+The Brief Wondrous Life of Oscar Wao,Junot Diaz,9781594483295,2007,Fiction,English
+The Human Stain,Philip Roth,9780099282198,2000,Fiction,English
+A Visit From The Goon Squad,Jennifer Egan,9780307477477,2010,Fiction,English
+Wolf Hall,Hilary Mantel,9780805080681,2009,Fiction,English
+Middlesex,Jeffrey Eugenides,9780312427733,2002,Fiction,English
+My Brilliant Friend,Elena Ferrante,9781609450786,2012,Fiction,Italian
+Americanah,Chimamanda Ngozi,9780307455925,2013,Fiction,English
+Cloud Atlas,David Mitchell,9780375507250,2004,Fiction,English
+Gilead,Marilynne Robinson,9780374153892,2004,Fiction,English
+The Years,Annie Ernaux,9781609807870,2008,Nonfiction,French
+House of Leaves,Mark Z. Danielewski,9780375703768,2000,Fiction,English
