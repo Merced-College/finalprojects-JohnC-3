@@ -1,5 +1,5 @@
 // John Chiero
-// 4/16/2026
+// 4/17/2026
 // Main class
 
 import java.io.File;
@@ -13,8 +13,14 @@ public class Main {
     public static void main(String[] args ) {
         loadBooks("Books.txt");
 
-        ArrayList<Book> testList = insertionSort("author", books);
+        ArrayList<Book> sortedList = insertionSort("author", books);
         System.out.println("\nSorted books by author:");
+        for(int i = 0; i < sortedList.size(); i++) {
+            System.out.println(sortedList.get(i));
+        }
+
+        ArrayList<Book> testList = binarySearch("author", "McCarthy", books);
+        System.out.println("\nSearch results:");
         for(int i = 0; i < testList.size(); i++) {
             System.out.println(testList.get(i));
         }
@@ -73,6 +79,7 @@ public class Main {
     }
 
     // Modified code from Assessment: Car Data Analyzer
+    // Method to sort the list of books using insertion sort by title, author, ISBN, publication year, genre or language
     private static ArrayList<Book> insertionSort(String sortBy, ArrayList<Book> books) {
         // Outer loop for each element in the list
         for(int i = 0; i < books.size(); i++) {
@@ -127,5 +134,107 @@ public class Main {
             }
         }
         return books;
+    }
+
+    // Modified code from Assessment: Car Data Analyzer
+    // Method to perform binary search on the sorted list for matching books
+    private static ArrayList<Book> binarySearch(String sortBy, String search, ArrayList<Book> books) {
+        // List to store matching results
+        ArrayList<Book> results = new ArrayList<Book>();
+        // Working copy of the list
+        ArrayList<Book> list = books;
+        int low = 0;
+        int high = list.size() - 1;
+
+        // Binary search loop
+        while(high >= low) {
+            int mid = (low + high) / 2;
+            if(sortBy.equalsIgnoreCase("author")) {
+                // Search by author
+                if(search.compareToIgnoreCase(list.get(mid).getAuthor().getLastName()) < 0) {
+                    high = mid - 1;
+                } else if(search.equalsIgnoreCase(list.get(mid).getAuthor().getLastName())) {
+                    // Found a match, add to results and remove from list to find all occurrences
+                    results.add(list.get(mid));
+                    list.remove(mid);
+                    // Reset search bounds
+                    low = 0;
+                    high = list.size() - 1;
+                } else {
+                    low = mid + 1;
+                }
+            } else if(sortBy.equalsIgnoreCase("ISBN")) {
+                // Search by ISBN
+                if(search.compareToIgnoreCase(list.get(mid).getISBN()) < 0) {
+                    high = mid - 1;
+                } else if(search.equalsIgnoreCase(list.get(mid).getISBN())) {
+                    // Found a match, add to results and remove from list to find all occurrences
+                    results.add(list.get(mid));
+                    list.remove(mid);
+                    // Reset search bounds
+                    low = 0;
+                    high = list.size() - 1;
+                } else {
+                    low = mid + 1;
+                }
+            } else if(sortBy.equalsIgnoreCase("publication year") || sortBy.equalsIgnoreCase("publicationyear")) {
+                // Search by publication year
+                if(Integer.parseInt(search) < list.get(mid).getPublicationYear()) {
+                    high = mid - 1;
+                } else if(Integer.parseInt(search) == list.get(mid).getPublicationYear()) {
+                    // Found a match, add to results and remove from list to find all occurrences
+                    results.add(list.get(mid));
+                    list.remove(mid);
+                    // Reset search bounds
+                    low = 0;
+                    high = list.size() - 1;
+                } else {
+                    low = mid + 1;
+                }
+            } else if(sortBy.equalsIgnoreCase("genre")) {
+                // Search by genre
+                if(search.compareToIgnoreCase(list.get(mid).getGenre()) < 0) {
+                    high = mid - 1;
+                } else if(search.equalsIgnoreCase(list.get(mid).getGenre())) {
+                    // Found a match, add to results and remove from list to find all occurrences
+                    results.add(list.get(mid));
+                    list.remove(mid);
+                    // Reset search bounds
+                    low = 0;
+                    high = list.size() - 1;
+                } else {
+                    low = mid + 1;
+                }
+            } else if(sortBy.equalsIgnoreCase("language")) {
+                // Search by language
+                if(search.compareToIgnoreCase(list.get(mid).getLanguage()) < 0) {
+                    high = mid - 1;
+                } else if(search.equalsIgnoreCase(list.get(mid).getLanguage())) {
+                    // Found a match, add to results and remove from list to find all occurrences
+                    results.add(list.get(mid));
+                    list.remove(mid);
+                    // Reset search bounds
+                    low = 0;
+                    high = list.size() - 1;
+                } else {
+                    low = mid + 1;
+                }
+            } else {
+                // Search by title
+                if(search.compareToIgnoreCase(list.get(mid).getTitle()) < 0) {
+                    high = mid - 1;
+                } else if(search.equalsIgnoreCase(list.get(mid).getTitle())) {
+                    // Found a match, add to results and remove from list
+                    results.add(list.get(mid));
+                    list.remove(mid);
+                    // Reset search bounds
+                    low = 0;
+                    high = list.size() - 1;
+                } else {
+                    low = mid + 1;
+                }
+            }
+        }
+        return results;
     }
 }
