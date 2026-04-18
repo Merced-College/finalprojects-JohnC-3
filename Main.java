@@ -12,8 +12,11 @@ public class Main {
 
     public static void main(String[] args ) {
         loadBooks("Books.txt");
-        for(int i = 0; i < books.size(); i++) {
-            System.out.println(books.get(i));
+
+        ArrayList<Book> testList = insertionSort("author", books);
+        System.out.println("\nSorted books by author:");
+        for(int i = 0; i < testList.size(); i++) {
+            System.out.println(testList.get(i));
         }
     }
 
@@ -25,7 +28,7 @@ public class Main {
             // Skip the header line
             scnr.nextLine();
 
-            // Read each line of the CSV
+            // Read each line of the file
             while(scnr.hasNextLine()) {
                 String line = scnr.nextLine();
                 // Skip empty lines
@@ -67,5 +70,62 @@ public class Main {
             System.out.println("File not found: " + filename);
             return;
         }
+    }
+
+    // Modified code from Assessment: Car Data Analyzer
+    private static ArrayList<Book> insertionSort(String sortBy, ArrayList<Book> books) {
+        // Outer loop for each element in the list
+        for(int i = 0; i < books.size(); i++) {
+            if(sortBy.equalsIgnoreCase("author")) {
+                // Inner loop to sort by author
+                for(int j = i; j > 0 && (books.get(j).getAuthor().getLastName() + books.get(j).getAuthor().getFirstName()).compareTo(books.get(j - 1).getAuthor().getLastName() + books.get(j - 1).getAuthor().getFirstName()) < 0; j--) {
+                    // Swap elements if out of order
+                    Book temp = books.get(j);
+                    books.set(j, books.get(j - 1));
+                    books.set(j - 1, temp);
+                }
+            } else if(sortBy.equalsIgnoreCase("ISBN")) {
+                // Inner loop to sort by ISBN
+                for(int j = i; j > 0 && books.get(j).getISBN().compareTo(books.get(j - 1).getISBN()) < 0; j--) {
+                    // Swap elements if out of order
+                    Book temp = books.get(j);
+                    books.set(j, books.get(j - 1));
+                    books.set(j - 1, temp);
+                }
+            } else if(sortBy.equalsIgnoreCase("publication year") || sortBy.equalsIgnoreCase("publicationyear")) {
+                // Inner loop to sort by publication year
+                for(int j = i; j > 0 && books.get(j).getPublicationYear() < books.get(j - 1).getPublicationYear(); j--) {
+                    // Swap elements if out of order
+                    Book temp = books.get(j);
+                    books.set(j, books.get(j - 1));
+                    books.set(j - 1, temp);
+                }
+            } else if(sortBy.equalsIgnoreCase("genre")) {
+                // Inner loop to sort by genre
+                for(int j = i; j > 0 && books.get(j).getGenre().compareTo(books.get(j - 1).getGenre()) < 0; j--) {
+                    // Swap elements if out of order
+                    Book temp = books.get(j);
+                    books.set(j, books.get(j - 1));
+                    books.set(j - 1, temp);
+                }
+            } else if(sortBy.equalsIgnoreCase("language")) {
+                // Inner loop to sort by language
+                for(int j = i; j > 0 && books.get(j).getLanguage().compareTo(books.get(j - 1).getLanguage()) < 0; j--) {
+                    // Swap elements if out of order
+                    Book temp = books.get(j);
+                    books.set(j, books.get(j - 1));
+                    books.set(j - 1, temp);
+                }
+            } else {
+                // Inner loop to sort by title
+                for(int j = i; j > 0 && books.get(j).getTitle().compareTo(books.get(j - 1).getTitle()) < 0; j--) {
+                    // Swap elements if out of order
+                    Book temp = books.get(j);
+                    books.set(j, books.get(j - 1));
+                    books.set(j - 1, temp);
+                }
+            }
+        }
+        return books;
     }
 }
