@@ -1,20 +1,20 @@
 // John Chiero
-// 4/16/2026
+// 4/17/2026
 // Member class
 
 public class Member {
-    private int id;
+    private String id;
     private String name;
     private String email;
     private String phone;
     private String address;
     private String membershipType;
-    private int joinDate;
-    private int expirationDate;
+    private String joinDate;
+    private String expirationDate;
     private int maxBooks;
     private int currBooks;
 
-    public Member(int id, String name, String email, String phone, String address, String membershipType, int joinDate, int expirationDate) {
+    public Member(String id, String name, String email, String phone, String address, String membershipType, String joinDate) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -22,8 +22,11 @@ public class Member {
         this.address = address;
         this.membershipType = membershipType;
         this.joinDate = joinDate;
-        this.expirationDate = expirationDate;
         this.currBooks = 0;
+
+        String[] parts = joinDate.split(" ");
+        parts[2] = String.valueOf(Integer.parseInt(parts[2]) + 1);
+        this.expirationDate = parts[0] + " " + parts[1] + " " + parts[2];
 
         if(membershipType.equals("Standard")) {
             this.maxBooks = 2;
@@ -38,11 +41,11 @@ public class Member {
         }
     }
 
-    public int getID() {
+    public String getID() {
         return id;
     }
 
-    public void setID(int id) {
+    public void setID(String id) {
         this.id = id;
     }
 
@@ -86,19 +89,19 @@ public class Member {
         this.membershipType = membershipType;
     }
 
-    public int getJoinDate() {
+    public String getJoinDate() {
         return joinDate;
     }
 
-    public void setJoinDate(int joinDate) {
+    public void setJoinDate(String joinDate) {
         this.joinDate = joinDate;
     }
 
-    public int getExpirationDate() {
+    public String getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(int expirationDate) {
+    public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
     }
 
@@ -116,5 +119,10 @@ public class Member {
 
     public void setCurrBooks(int currBooks) {
         this.currBooks = currBooks;
+    }
+
+    @Override
+    public String toString() {
+        return id + ", " + name + ", " + email + ", " + phone + ", " + address + ", " + membershipType + ", " + joinDate + ", " + expirationDate + ", " + currBooks + ", " + maxBooks;
     }
 }

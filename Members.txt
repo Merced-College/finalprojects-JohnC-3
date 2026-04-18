@@ -1,0 +1,11 @@
+ID,Name,Email,Phone,Address,Membership Type,Join Date
+0000001,Benedict Richardson,benedict.richardson@fake.email.com,(000)000-0001,1901 Address Dr.,Student,2 June 2025
+0000002,Albina Jones,albina.jones@fake.email.com,(000)000-0002,1902 Address Dr.,Premium,20 June 2025
+0000003,Mikelle Butler,mikelle.butler@fake.email.com,(000)000-0003,1903 Address Dr.,Faculty,21 July 2025
+0000004,Davena Brooks,davena.brooks@fake.email.com,(000)000-0004,1904 Address Dr.,Faculty,21 August 2025
+0000005,Corbin Campbell,corbin.campbell@fake.email.com,(000)000-0005,1905 Address Dr.,Student,26 August 2025
+0000006,Amethyst Adams,amethyst.adams@fake.email.com,(000)000-0006,1906 Address Dr.,Premium,24 September 2025
+0000007,Veltry Lopez,veltry.lopez@fake.email.com,(000)000-0007,1907 Address Dr.,Student,28 October 2025
+0000008,Hope Morris,hope.morris@fake.email.com,(000)000-0008,1908 Address Dr.,Faculty,11 November 2025
+0000009,Maynard Rogers,maynard.rogers@fake.email.com,(000)000-0009,1909 Address Dr.,Premium,19 December 2025
+0000010,Aviana Mitchell,aviana.mitchell@fake.email.com,(000)000-0010,1910 Address Dr.,Standard,9 February 2026

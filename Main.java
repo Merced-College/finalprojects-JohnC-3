@@ -9,20 +9,18 @@ import java.util.Scanner;
 
 public class Main {
     private static ArrayList<Book> books = new ArrayList<Book>();
+    private static ArrayList<Member> members = new ArrayList<Member>();
 
     public static void main(String[] args ) {
         loadBooks("Books.txt");
-
-        ArrayList<Book> sortedList = insertionSort("author", books);
-        System.out.println("\nSorted books by author:");
-        for(int i = 0; i < sortedList.size(); i++) {
-            System.out.println(sortedList.get(i));
+        for(int i = 0; i < books.size(); i++) {
+            System.out.println(books.get(i));
         }
 
-        ArrayList<Book> testList = binarySearch("author", "McCarthy", books);
-        System.out.println("\nSearch results:");
-        for(int i = 0; i < testList.size(); i++) {
-            System.out.println(testList.get(i));
+        System.out.println("");
+        loadMembers("Members.txt");
+        for(int i = 0; i < members.size(); i++) {
+            System.out.println(members.get(i));
         }
     }
 
@@ -64,14 +62,54 @@ public class Main {
                 }
                 Author author = new Author(firstName, lastName, middleInitial);
 
-                // Create a new Car object and add it to the list
+                // Create a new Book object and add it to the list
                 Book book = new Book(title, author, isbn, publicationYear, genre, language);
                 books.add(book);
                 count++;
             }
 
-            // Display the total number of cars loaded
+            // Display the total number of books loaded
             System.out.println("Total books loaded: " + count);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + filename);
+            return;
+        }
+    }
+
+    // Modified code from Assessment: Car Data Analyzer
+    private static void loadMembers(String filename) {
+        // Try to open and read the file
+        try(Scanner scnr = new Scanner(new File(filename))) {
+            int count = 0;
+            // Skip the header line
+            scnr.nextLine();
+
+            // Read each line of the file
+            while(scnr.hasNextLine()) {
+                String line = scnr.nextLine();
+                // Skip empty lines
+                if (line.isEmpty()) continue;
+
+                // Split the line by commas to get individual fields
+                String[] parts = line.split(",");
+
+                // Parse each field
+                String id = parts[0];
+                String name = parts[1];
+                String email = parts[2];
+                String phone = parts[3];
+                String address = parts[4];
+                String membershipType = parts[5];
+                String joinDate = parts[6];
+
+                // Create a new Member object and add it to the list
+                Member member = new Member(id, name, email, phone, address, membershipType, joinDate);
+                members.add(member);
+                count++;
+            }
+
+            // Display the total number of members loaded
+            System.out.println("Total members loaded: " + count);
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + filename);
             return;
