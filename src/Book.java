@@ -1,5 +1,6 @@
+package src;
 // John Chiero
-// 4/16/2026
+// 4/20/2026
 // Book class
 
 public class Book {
@@ -9,6 +10,7 @@ public class Book {
     private int publicationYear;
     private String genre;
     private String language;
+    private Status status;
 
     public Book(String title, Author author, String isbn, int publicationYear, String genre, String language) {
         this.title = title;
@@ -17,6 +19,7 @@ public class Book {
         this.publicationYear = publicationYear;
         this.genre = genre;
         this.language = language;
+        this.status = new Status();
     }
 
     public String getTitle() {
@@ -65,6 +68,14 @@ public class Book {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override

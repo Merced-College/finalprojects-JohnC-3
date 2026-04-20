@@ -1,5 +1,6 @@
+package src;
 // John Chiero
-// 4/17/2026
+// 4/20/2026
 // Main class
 
 import java.io.File;
@@ -12,13 +13,17 @@ public class Main {
     private static ArrayList<Member> members = new ArrayList<Member>();
 
     public static void main(String[] args ) {
-        loadBooks("Books.txt");
+        setup();
+    }
+
+    private static void setup() {
+        loadBooks("docs/Books.txt");
         for(int i = 0; i < books.size(); i++) {
             System.out.println(books.get(i));
         }
 
         System.out.println("");
-        loadMembers("Members.txt");
+        loadMembers("docs/Members.txt");
         for(int i = 0; i < members.size(); i++) {
             System.out.println(members.get(i));
         }
