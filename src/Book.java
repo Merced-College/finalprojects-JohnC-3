@@ -80,6 +80,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return title + ", " + author + ", " + isbn + ", " + publicationYear + ", " + genre + ", " + language;
+        return title + ", " + author + ", " + isbn + ", " + publicationYear + ", " + genre + ", " + language + ", " + status;
     }
 }

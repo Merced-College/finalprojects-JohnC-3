@@ -48,4 +48,13 @@ public class Status {
     public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
     }
+
+    @Override
+    public String toString() {
+        if(availability.equals("Available")) {
+            return availability;
+        } else {
+            return availability + ", " + ", " + member + ", " + borrowDate + ", " + dueDate;
+        }
+    }
 }
