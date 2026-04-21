@@ -1,6 +1,6 @@
 package src;
 // John Chiero
-// 4/17/2026
+// 4/20/2026
 // Member class
 
 public class Member {
@@ -25,11 +25,17 @@ public class Member {
         this.joinDate = joinDate;
         this.currBooks = 0;
 
-        String[] parts = joinDate.split(" ");
-        parts[2] = String.valueOf(Integer.parseInt(parts[2]) + 1);
-        this.expirationDate = parts[0] + " " + parts[1] + " " + parts[2];
+        if(!(joinDate == null)) {
+            String[] parts = joinDate.split(" ");
+            parts[2] = String.valueOf(Integer.parseInt(parts[2]) + 1);
+            this.expirationDate = parts[0] + " " + parts[1] + " " + parts[2];
+        } else {
+            this.expirationDate = null;
+        }
 
-        if(membershipType.equals("Standard")) {
+        if(membershipType == null) {
+            this.maxBooks = 0;
+        }else if(membershipType.equals("Standard")) {
             this.maxBooks = 2;
         } else if(membershipType.equals("Student")) {
             this.maxBooks = 3;

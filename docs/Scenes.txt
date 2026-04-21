@@ -1,0 +1,3 @@
+Scene ID,Prompt,Choices,Next IDs
+0,Select an option by entering the number listed.,Search for a book;Exit,1;-1
+1,Search for a book by:,Title;Author;ISBN;Publication year;Genre;Language;Back,2;2;2;2;2;2;0

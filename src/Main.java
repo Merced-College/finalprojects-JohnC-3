@@ -6,14 +6,17 @@ package src;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
     private static ArrayList<Book> books = new ArrayList<Book>();
     private static ArrayList<Member> members = new ArrayList<Member>();
+    private static ArrayList<Scene> scenes = new ArrayList<Scene>();
 
     public static void main(String[] args ) {
         setup();
+        libraryManager();
     }
 
     private static void setup() {
@@ -26,6 +29,39 @@ public class Main {
         loadMembers("docs/Members.txt");
         for(int i = 0; i < members.size(); i++) {
             System.out.println(members.get(i));
+        }
+
+        System.out.println("");
+        loadScenes("docs/Scenes.txt");
+
+        System.out.println("\n\n\n------------------------------\n\n\n");
+    }
+
+    private static void libraryManager() {
+        Scanner scnr = new Scanner(System.in);
+        int input;
+        String writtenInput;
+        int currSceneID = 0;
+        Scene currScene;
+
+        System.out.println("Welcome to the Library Manager!\n");
+        while(true) {
+            if(currSceneID != -1) {
+                currScene = scenes.get(currSceneID);
+            } else {
+                break;
+            }
+
+            System.out.println(currScene.getPrompt());
+            for(int i = 0; i < currScene.getChoices().length; i++) {
+                if(i < 10) {
+                    System.out.print(" ");
+                }
+                System.out.println(i + ": " + currScene.getChoices()[i]);
+            }
+            System.out.println("");
+            input = scnr.nextInt();
+            currSceneID = currScene.getNextIDs()[input];
         }
     }
 
@@ -115,6 +151,43 @@ public class Main {
 
             // Display the total number of members loaded
             System.out.println("Total members loaded: " + count);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + filename);
+            return;
+        }
+    }
+
+    // Modified code from Assessment: Car Data Analyzer
+    private static void loadScenes(String filename) {
+        // Try to open and read the file
+        try(Scanner scnr = new Scanner(new File(filename))) {
+            int count = 0;
+            // Skip the header line
+            scnr.nextLine();
+
+            // Read each line of the file
+            while(scnr.hasNextLine()) {
+                String line = scnr.nextLine();
+                // Skip empty lines
+                if (line.isEmpty()) continue;
+
+                // Split the line by commas to get individual fields
+                String[] parts = line.split(",");
+
+                // Parse each field
+                int sceneID = Integer.parseInt(parts[0]);
+                String prompt = parts[1];
+                String[] choices = parts[2].split(";");
+                int[] nextIDs = Arrays.stream(parts[3].split(";")).mapToInt(Integer::parseInt).toArray();
+
+                // Create a new Member object and add it to the list
+                Scene scene = new Scene(sceneID, prompt, choices, nextIDs);
+                scenes.add(scene);
+                count++;
+            }
+
+            // Display the total number of scenes loaded
+            System.out.println("Total scenes loaded: " + count);
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + filename);
             return;
