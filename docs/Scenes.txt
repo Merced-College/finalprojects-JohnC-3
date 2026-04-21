@@ -1,3 +1,6 @@
 Scene ID,Prompt,Choices,Next IDs
-0,Select an option by entering the number listed.,Search for a book;Exit,1;-1
+0,Select an option by entering the number listed.,Search for a book;Get list of all books;Exit,1;3;-1
 1,Search for a book by:,Title;Author;ISBN;Publication year;Genre;Language;Back,2;2;2;2;2;2;0
+2,Enter search term: ,null,0
+3,Sort list by:,Title;Author;ISBN;Publication year;Genre;Language;Back,4;4;4;4;4;4;0
+4,Full list of all books:,null,0

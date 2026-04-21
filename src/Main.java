@@ -43,6 +43,8 @@ public class Main {
         String writtenInput;
         int currSceneID = 0;
         Scene currScene;
+        String sortBy = "";
+        ArrayList<Book> bookResults;
 
         System.out.println("Welcome to the Library Manager!\n");
         while(true) {
@@ -52,17 +54,41 @@ public class Main {
                 break;
             }
 
-            System.out.println(currScene.getPrompt());
-            for(int i = 0; i < currScene.getChoices().length; i++) {
-                if(i < 10) {
-                    System.out.print(" ");
+            if(currSceneID == 2) {
+                System.out.print(currScene.getPrompt());
+                scnr.nextLine();
+                writtenInput = scnr.nextLine();
+                bookResults = binarySearch(sortBy, writtenInput, insertionSort(sortBy, books));
+                System.out.println("\nSearch results:");
+                for(int i = 0; i < bookResults.size(); i++) {
+                    System.out.println(bookResults.get(i));
                 }
-                System.out.println(i + ": " + currScene.getChoices()[i]);
+                currSceneID = 0;
+            } else if(currSceneID == 4) {
+                System.out.println(currScene.getPrompt());
+                bookResults = insertionSort(sortBy, books);
+                for(int i = 0; i < bookResults.size(); i++) {
+                    System.out.println(bookResults.get(i));
+                }
+                currSceneID = 0;
+            } else {
+                System.out.println(currScene.getPrompt());
+                for(int i = 0; i < currScene.getChoices().length; i++) {
+                    if(i < 10) {
+                        System.out.print(" ");
+                    }
+                    System.out.println(i + ": " + currScene.getChoices()[i]);
+                }
+                System.out.println("");
+                input = scnr.nextInt();
+                if(currSceneID == 1 || currSceneID == 3) {
+                    sortBy = currScene.getChoices()[input];
+                }
+                currSceneID = currScene.getNextIDs()[input];
             }
-            System.out.println("");
-            input = scnr.nextInt();
-            currSceneID = currScene.getNextIDs()[input];
+            System.out.println("\n\n\n------------------------------\n\n\n");
         }
+        scnr.close();
     }
 
     // Modified code from Assessment: Car Data Analyzer
