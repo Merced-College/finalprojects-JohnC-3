@@ -1,6 +1,6 @@
 package src;
 // John Chiero
-// 4/20/2026
+// 4/21/2026
 // Main class
 
 import java.io.File;
@@ -121,6 +121,38 @@ public class Main {
                     bookResults.get(0).setStatus("Checked out", memberResults.get(0), currDate, dueDate);
                     memberResults.get(0).setCurrBooks(memberResults.get(0).getCurrBooks() + 1);
                     System.out.println("Book checked out successfully!");
+                }
+                currSceneID = 0;
+            } else if(currSceneID == 11) {
+                System.out.print(currScene.getPrompt());
+                scnr.nextLine();
+                writtenInput = scnr.nextLine();
+                sortBy = "ID";
+                memberResults = memberBinarySearch(sortBy, writtenInput, memberInsertionSort(sortBy, members));
+                if(memberResults.size() == 0) {
+                    System.out.println("Failed to find member.");
+                    currSceneID = 0;
+                } else if(memberResults.get(0).getCurrBooks() == 0) {
+                    System.out.println("Member has no books checked out.");
+                    currSceneID = 0;
+                } else {
+                    currSceneID = 12;
+                }
+            } else if(currSceneID ==12) {
+                System.out.print(currScene.getPrompt());
+                writtenInput = scnr.nextLine();
+                sortBy = "ISBN";
+                bookResults = bookBinarySearch(sortBy, writtenInput, bookInsertionSort(sortBy, books));
+                if(bookResults.size() == 0) {
+                    System.out.println("Failed to find book.");
+                } else if(!bookResults.get(0).getStatus().getAvailability().equals("Checked out")) {
+                    System.out.println("Member does not have this book checked out.");
+                } else if(!bookResults.get(0).getStatus().getMember().getID().equals(memberResults.get(0).getID())) {
+                    System.out.println("Member does not have this book checked out.");
+                } else {
+                    bookResults.get(0).setStatus("Available", null, null, null);
+                    memberResults.get(0).setCurrBooks(memberResults.get(0).getCurrBooks() - 1);
+                    System.out.println("Book checked in successfully!");
                 }
                 currSceneID = 0;
             } else {
