@@ -1,5 +1,5 @@
 Scene ID,Prompt,Choices,Next IDs
-0,Select an option by entering the number listed.,Search for a book;Get list of all books;Search for member;Get list of all members;Exit,1;3;5;7;-1
+0,Select an option by entering the number listed.,Search for a book;Get list of all books;Search for member;Get list of all members;Check out a book;Exit,1;3;5;7;9;-1
 1,Search for a book by:,Title;Author;ISBN;Publication year;Genre;Language;Back,2;2;2;2;2;2;0
 2,Enter search term: ,null,0
 3,Sort list by:,Title;Author;ISBN;Publication year;Genre;Language;Back,4;4;4;4;4;4;0
@@ -8,3 +8,5 @@ Scene ID,Prompt,Choices,Next IDs
 6,Enter search term: ,null,0
 7,Sort list by:,ID;Name;Email;Phone;Address;Join date;Back,8;8;8;8;8;8;0
 8,Full list of all members:,null,0
+9,Enter the ID of the member checking out the book: ,null,0
+10,Enter the ISBN of the book they are checking out: ,null,0

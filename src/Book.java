@@ -74,8 +74,11 @@ public class Book {
         return status;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatus(String availability, Member member, String borrowDate, String dueDate) {
+        this.status.setAvailability(availability);
+        this.status.setMember(member);
+        this.status.setBorrowDate(borrowDate);
+        this.status.setDueDate(dueDate);
     }
 
     @Override

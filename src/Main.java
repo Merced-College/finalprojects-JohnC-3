@@ -45,7 +45,7 @@ public class Main {
         Scene currScene;
         String sortBy = "";
         ArrayList<Book> bookResults;
-        ArrayList<Member> memberResults;
+        ArrayList<Member> memberResults = new ArrayList<Member>();
 
         System.out.println("Welcome to the Library Manager!\n");
         while(true) {
@@ -87,6 +87,40 @@ public class Main {
                 memberResults = memberInsertionSort(sortBy, members);
                 for(int i = 0; i < memberResults.size(); i++) {
                     System.out.println(memberResults.get(i));
+                }
+                currSceneID = 0;
+            } else if(currSceneID == 9) {
+                System.out.print(currScene.getPrompt());
+                scnr.nextLine();
+                writtenInput = scnr.nextLine();
+                sortBy = "ID";
+                memberResults = memberBinarySearch(sortBy, writtenInput, memberInsertionSort(sortBy, members));
+                if(memberResults.size() == 0) {
+                    System.out.println("Failed to find member.");
+                    currSceneID = 0;
+                } else if(memberResults.get(0).getCurrBooks() == memberResults.get(0).getMaxBooks()) {
+                    System.out.println("Member has too many books checked out.");
+                    currSceneID = 0;
+                } else {
+                    currSceneID = 10;
+                }
+            } else if(currSceneID ==10) {
+                System.out.print(currScene.getPrompt());
+                writtenInput = scnr.nextLine();
+                sortBy = "ISBN";
+                bookResults = bookBinarySearch(sortBy, writtenInput, bookInsertionSort(sortBy, books));
+                if(bookResults.size() == 0) {
+                    System.out.println("Failed to find book.");
+                } else if(!bookResults.get(0).getStatus().getAvailability().equals("Available")) {
+                    System.out.println("Book is not available.");
+                } else {
+                    System.out.print("Enter current date (e.g. 1 Jan 2020): ");
+                    String currDate = scnr.nextLine();
+                    System.out.print("Enter due date (e.g. 1 Jan 2020): ");
+                    String dueDate = scnr.nextLine();
+                    bookResults.get(0).setStatus("Checked out", memberResults.get(0), currDate, dueDate);
+                    memberResults.get(0).setCurrBooks(memberResults.get(0).getCurrBooks() + 1);
+                    System.out.println("Book checked out successfully!");
                 }
                 currSceneID = 0;
             } else {
@@ -302,7 +336,7 @@ public class Main {
         // List to store matching results
         ArrayList<Book> results = new ArrayList<Book>();
         // Working copy of the list
-        ArrayList<Book> list = books;
+        ArrayList<Book> list = new ArrayList<Book>(books);
         int low = 0;
         int high = list.size() - 1;
 
@@ -462,7 +496,7 @@ public class Main {
         // List to store matching results
         ArrayList<Member> results = new ArrayList<Member>();
         // Working copy of the list
-        ArrayList<Member> list = members;
+        ArrayList<Member> list = new ArrayList<Member>(members);
         int low = 0;
         int high = list.size() - 1;
 

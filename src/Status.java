@@ -54,7 +54,7 @@ public class Status {
         if(availability.equals("Available")) {
             return availability;
         } else {
-            return availability + ", " + ", " + member + ", " + borrowDate + ", " + dueDate;
+            return availability + ", " + member.getName() + ", " + borrowDate + ", " + dueDate;
         }
     }
 }
