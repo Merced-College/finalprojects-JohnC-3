@@ -104,7 +104,7 @@ public class Main {
                 } else {
                     currSceneID = 10;
                 }
-            } else if(currSceneID ==10) {
+            } else if(currSceneID == 10) {
                 System.out.print(currScene.getPrompt());
                 writtenInput = scnr.nextLine();
                 sortBy = "ISBN";
@@ -112,6 +112,19 @@ public class Main {
                 if(bookResults.size() == 0) {
                     System.out.println("Failed to find book.");
                 } else if(!bookResults.get(0).getStatus().getAvailability().equals("Available")) {
+                    if(bookResults.get(0).getStatus().getAvailability().equals("Reserved")) {
+                        if(bookResults.get(0).getStatus().getMember().getID().equals(memberResults.get(0).getID())) {
+                            System.out.print("Enter current date (e.g. 1 Jan 2020): ");
+                            String currDate = scnr.nextLine();
+                            System.out.print("Enter due date (e.g. 1 Jan 2020): ");
+                            String dueDate = scnr.nextLine();
+                            bookResults.get(0).setStatus("Checked out", memberResults.get(0), currDate, dueDate);
+                            memberResults.get(0).setCurrBooks(memberResults.get(0).getCurrBooks() + 1);
+                            System.out.println("Book checked out successfully!");
+                            currSceneID = 0;
+                            continue;
+                        }
+                    }
                     System.out.println("Book is not available.");
                 } else {
                     System.out.print("Enter current date (e.g. 1 Jan 2020): ");
@@ -138,7 +151,7 @@ public class Main {
                 } else {
                     currSceneID = 12;
                 }
-            } else if(currSceneID ==12) {
+            } else if(currSceneID == 12) {
                 System.out.print(currScene.getPrompt());
                 writtenInput = scnr.nextLine();
                 sortBy = "ISBN";
@@ -150,9 +163,46 @@ public class Main {
                 } else if(!bookResults.get(0).getStatus().getMember().getID().equals(memberResults.get(0).getID())) {
                     System.out.println("Member does not have this book checked out.");
                 } else {
-                    bookResults.get(0).setStatus("Available", null, null, null);
+                    if(bookResults.get(0).getQueue().size() > 0) {
+                        bookResults.get(0).setStatus("Reserved", bookResults.get(0).getQueue().peek(), null, null);
+                        bookResults.get(0).removeFromQueue();
+                    } else {
+                        bookResults.get(0).setStatus("Available", null, null, null);
+                    }
                     memberResults.get(0).setCurrBooks(memberResults.get(0).getCurrBooks() - 1);
                     System.out.println("Book checked in successfully!");
+                }
+                currSceneID = 0;
+            } else if(currSceneID == 13) {
+                System.out.print(currScene.getPrompt());
+                scnr.nextLine();
+                writtenInput = scnr.nextLine();
+                sortBy = "ID";
+                memberResults = memberBinarySearch(sortBy, writtenInput, memberInsertionSort(sortBy, members));
+                if(memberResults.size() == 0) {
+                    System.out.println("Failed to find member.");
+                    currSceneID = 0;
+                } else if(memberResults.get(0).getHasReservation()) {
+                    System.out.println("Member already has a reservation.");
+                    currSceneID = 0;
+                } else {
+                    currSceneID = 14;
+                }
+            } else if(currSceneID == 14) {
+                System.out.print(currScene.getPrompt());
+                writtenInput = scnr.nextLine();
+                sortBy = "ISBN";
+                bookResults = bookBinarySearch(sortBy, writtenInput, bookInsertionSort(sortBy, books));
+                if(bookResults.size() == 0) {
+                    System.out.println("Failed to find book.");
+                } else if(!(bookResults.get(0).getStatus().getAvailability().equals("Checked out") || bookResults.get(0).getStatus().getAvailability().equals("Reserved"))) {
+                    System.out.println("Book is available, no need to reserve.");
+                } else if(bookResults.get(0).getStatus().getMember().getID().equals(memberResults.get(0).getID())) {
+                    System.out.println("Member already has this book checked out.");
+                } else {
+                    bookResults.get(0).addToQueue(memberResults.get(0));
+                    memberResults.get(0).setReservation(bookResults.get(0));
+                    System.out.println("Book reserved/queued successfully!");
                 }
                 currSceneID = 0;
             } else {

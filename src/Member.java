@@ -1,6 +1,6 @@
 package src;
 // John Chiero
-// 4/20/2026
+// 4/21/2026
 // Member class
 
 public class Member {
@@ -14,6 +14,8 @@ public class Member {
     private String expirationDate;
     private int maxBooks;
     private int currBooks;
+    private Book reservation;
+    private boolean hasReservation;
 
     public Member(String id, String name, String email, String phone, String address, String membershipType, String joinDate) {
         this.id = id;
@@ -24,6 +26,8 @@ public class Member {
         this.membershipType = membershipType;
         this.joinDate = joinDate;
         this.currBooks = 0;
+        this.reservation = null;
+        this.hasReservation = false;
 
         if(!(joinDate == null)) {
             String[] parts = joinDate.split(" ");
@@ -126,6 +130,23 @@ public class Member {
 
     public void setCurrBooks(int currBooks) {
         this.currBooks = currBooks;
+    }
+
+    public Book getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Book reservation) {
+        this.reservation = reservation;
+        setHasReservation(reservation != null);
+    }
+
+    public boolean getHasReservation() {
+        return hasReservation;
+    }
+
+    public void setHasReservation(boolean hasReservation) {
+        this.hasReservation = hasReservation;
     }
 
     @Override

@@ -1,5 +1,5 @@
 Scene ID,Prompt,Choices,Next IDs
-0,Select an option by entering the number listed.,Search for a book;Get list of all books;Search for member;Get list of all members;Check out a book;Check in a book;Exit,1;3;5;7;9;11;-1
+0,Select an option by entering the number listed.,Search for a book;Get list of all books;Search for member;Get list of all members;Check out a book;Check in a book;Reserve/Queue for a book.;Exit,1;3;5;7;9;11;13;-1
 1,Search for a book by:,Title;Author;ISBN;Publication year;Genre;Language;Back,2;2;2;2;2;2;0
 2,Enter search term: ,null,0
 3,Sort list by:,Title;Author;ISBN;Publication year;Genre;Language;Back,4;4;4;4;4;4;0
@@ -12,3 +12,5 @@ Scene ID,Prompt,Choices,Next IDs
 10,Enter the ISBN of the book they are checking out: ,null,0
 11,Enter the ID of the member checking in the book: ,null,0
 12,Enter the ISBN of the book they are checking in: ,null,0
+13,Enter the ID of the member that wants to reserve/queue: ,null,0
+14,Enter the ISBN of the book they wnat to reserve/queue for: ,null,0

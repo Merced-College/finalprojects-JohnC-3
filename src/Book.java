@@ -1,7 +1,9 @@
 package src;
 // John Chiero
-// 4/20/2026
+// 4/21/2026
 // Book class
+
+import java.util.*;
 
 public class Book {
     private String title;
@@ -11,6 +13,7 @@ public class Book {
     private String genre;
     private String language;
     private Status status;
+    private Queue<Member> queue;
 
     public Book(String title, Author author, String isbn, int publicationYear, String genre, String language) {
         this.title = title;
@@ -20,6 +23,7 @@ public class Book {
         this.genre = genre;
         this.language = language;
         this.status = new Status();
+        this.queue = new LinkedList<>();
     }
 
     public String getTitle() {
@@ -79,6 +83,18 @@ public class Book {
         this.status.setMember(member);
         this.status.setBorrowDate(borrowDate);
         this.status.setDueDate(dueDate);
+    }
+
+    public Queue<Member> getQueue() {
+        return queue;
+    }
+
+    public void addToQueue(Member member) {
+        this.queue.add(member);
+    }
+
+    public void removeFromQueue() {
+        this.queue.poll();
     }
 
     @Override
