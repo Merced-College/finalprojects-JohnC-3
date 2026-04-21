@@ -45,6 +45,7 @@ public class Main {
         Scene currScene;
         String sortBy = "";
         ArrayList<Book> bookResults;
+        ArrayList<Member> memberResults;
 
         System.out.println("Welcome to the Library Manager!\n");
         while(true) {
@@ -58,7 +59,7 @@ public class Main {
                 System.out.print(currScene.getPrompt());
                 scnr.nextLine();
                 writtenInput = scnr.nextLine();
-                bookResults = binarySearch(sortBy, writtenInput, insertionSort(sortBy, books));
+                bookResults = bookBinarySearch(sortBy, writtenInput, bookInsertionSort(sortBy, books));
                 System.out.println("\nSearch results:");
                 for(int i = 0; i < bookResults.size(); i++) {
                     System.out.println(bookResults.get(i));
@@ -66,9 +67,26 @@ public class Main {
                 currSceneID = 0;
             } else if(currSceneID == 4) {
                 System.out.println(currScene.getPrompt());
-                bookResults = insertionSort(sortBy, books);
+                bookResults = bookInsertionSort(sortBy, books);
                 for(int i = 0; i < bookResults.size(); i++) {
                     System.out.println(bookResults.get(i));
+                }
+                currSceneID = 0;
+            } else if(currSceneID == 6) {
+                System.out.print(currScene.getPrompt());
+                scnr.nextLine();
+                writtenInput = scnr.nextLine();
+                memberResults = memberBinarySearch(sortBy, writtenInput, memberInsertionSort(sortBy, members));
+                System.out.println("\nSearch results:");
+                for(int i = 0; i < memberResults.size(); i++) {
+                    System.out.println(memberResults.get(i));
+                }
+                currSceneID = 0;
+            } else if(currSceneID == 8) {
+                System.out.println(currScene.getPrompt());
+                memberResults = memberInsertionSort(sortBy, members);
+                for(int i = 0; i < memberResults.size(); i++) {
+                    System.out.println(memberResults.get(i));
                 }
                 currSceneID = 0;
             } else {
@@ -81,7 +99,7 @@ public class Main {
                 }
                 System.out.println("");
                 input = scnr.nextInt();
-                if(currSceneID == 1 || currSceneID == 3) {
+                if(currSceneID == 1 || currSceneID == 3 || currSceneID == 5 || currSceneID == 7) {
                     sortBy = currScene.getChoices()[input];
                 }
                 currSceneID = currScene.getNextIDs()[input];
@@ -222,7 +240,7 @@ public class Main {
 
     // Modified code from Assessment: Car Data Analyzer
     // Method to sort the list of books using insertion sort by title, author, ISBN, publication year, genre or language
-    private static ArrayList<Book> insertionSort(String sortBy, ArrayList<Book> books) {
+    private static ArrayList<Book> bookInsertionSort(String sortBy, ArrayList<Book> books) {
         // Outer loop for each element in the list
         for(int i = 0; i < books.size(); i++) {
             if(sortBy.equalsIgnoreCase("author")) {
@@ -280,7 +298,7 @@ public class Main {
 
     // Modified code from Assessment: Car Data Analyzer
     // Method to perform binary search on the sorted list for matching books
-    private static ArrayList<Book> binarySearch(String sortBy, String search, ArrayList<Book> books) {
+    private static ArrayList<Book> bookBinarySearch(String sortBy, String search, ArrayList<Book> books) {
         // List to store matching results
         ArrayList<Book> results = new ArrayList<Book>();
         // Working copy of the list
@@ -366,6 +384,166 @@ public class Main {
                 if(search.compareToIgnoreCase(list.get(mid).getTitle()) < 0) {
                     high = mid - 1;
                 } else if(search.equalsIgnoreCase(list.get(mid).getTitle())) {
+                    // Found a match, add to results and remove from list
+                    results.add(list.get(mid));
+                    list.remove(mid);
+                    // Reset search bounds
+                    low = 0;
+                    high = list.size() - 1;
+                } else {
+                    low = mid + 1;
+                }
+            }
+        }
+        return results;
+    }
+
+    // Modified code from Assessment: Car Data Analyzer
+    // Method to sort the list of members using insertion sort by ID, name, email, phone, address or join date
+    private static ArrayList<Member> memberInsertionSort(String sortBy, ArrayList<Member> members) {
+        // Outer loop for each element in the list
+        for(int i = 0; i < members.size(); i++) {
+            if(sortBy.equalsIgnoreCase("name")) {
+                // Inner loop to sort by name
+                for(int j = i; j > 0 && members.get(j).getName().compareTo(members.get(j - 1).getName()) < 0; j--) {
+                    // Swap elements if out of order
+                    Member temp = members.get(j);
+                    members.set(j, members.get(j - 1));
+                    members.set(j - 1, temp);
+                }
+            } else if(sortBy.equalsIgnoreCase("email")) {
+                // Inner loop to sort by email
+                for(int j = i; j > 0 && members.get(j).getEmail().compareTo(members.get(j - 1).getEmail()) < 0; j--) {
+                    // Swap elements if out of order
+                    Member temp = members.get(j);
+                    members.set(j, members.get(j - 1));
+                    members.set(j - 1, temp);
+                }
+            } else if(sortBy.equalsIgnoreCase("phone")) {
+                // Inner loop to sort by phone
+                for(int j = i; j > 0 && members.get(j).getPhone().compareTo(members.get(j - 1).getPhone()) < 0; j--) {
+                    // Swap elements if out of order
+                    Member temp = members.get(j);
+                    members.set(j, members.get(j - 1));
+                    members.set(j - 1, temp);
+                }
+            } else if(sortBy.equalsIgnoreCase("address")) {
+                // Inner loop to sort by address
+                for(int j = i; j > 0 && members.get(j).getAddress().compareTo(members.get(j - 1).getAddress()) < 0; j--) {
+                    // Swap elements if out of order
+                    Member temp = members.get(j);
+                    members.set(j, members.get(j - 1));
+                    members.set(j - 1, temp);
+                }
+            } else if(sortBy.equalsIgnoreCase("join date")) {
+                // Inner loop to sort by join date
+                for(int j = i; j > 0 && members.get(j).getJoinDate().compareTo(members.get(j - 1).getJoinDate()) < 0; j--) {
+                    // Swap elements if out of order
+                    Member temp = members.get(j);
+                    members.set(j, members.get(j - 1));
+                    members.set(j - 1, temp);
+                }
+            } else {
+                // Inner loop to sort by ID
+                for(int j = i; j > 0 && members.get(j).getID().compareTo(members.get(j - 1).getID()) < 0; j--) {
+                    // Swap elements if out of order
+                    Member temp = members.get(j);
+                    members.set(j, members.get(j - 1));
+                    members.set(j - 1, temp);
+                }
+            }
+        }
+        return members;
+    }
+
+    // Modified code from Assessment: Car Data Analyzer
+    // Method to perform binary search on the sorted list for matching members
+    private static ArrayList<Member> memberBinarySearch(String sortBy, String search, ArrayList<Member> members) {
+        // List to store matching results
+        ArrayList<Member> results = new ArrayList<Member>();
+        // Working copy of the list
+        ArrayList<Member> list = members;
+        int low = 0;
+        int high = list.size() - 1;
+
+        // Binary search loop
+        while(high >= low) {
+            int mid = (low + high) / 2;
+            if(sortBy.equalsIgnoreCase("name")) {
+                // Search by name
+                if(search.compareToIgnoreCase(list.get(mid).getName()) < 0) {
+                    high = mid - 1;
+                } else if(search.equalsIgnoreCase(list.get(mid).getName())) {
+                    // Found a match, add to results and remove from list to find all occurrences
+                    results.add(list.get(mid));
+                    list.remove(mid);
+                    // Reset search bounds
+                    low = 0;
+                    high = list.size() - 1;
+                } else {
+                    low = mid + 1;
+                }
+            } else if(sortBy.equalsIgnoreCase("email")) {
+                // Search by email
+                if(search.compareToIgnoreCase(list.get(mid).getEmail()) < 0) {
+                    high = mid - 1;
+                } else if(search.equalsIgnoreCase(list.get(mid).getEmail())) {
+                    // Found a match, add to results and remove from list to find all occurrences
+                    results.add(list.get(mid));
+                    list.remove(mid);
+                    // Reset search bounds
+                    low = 0;
+                    high = list.size() - 1;
+                } else {
+                    low = mid + 1;
+                }
+            } else if(sortBy.equalsIgnoreCase("phone")) {
+                // Search by phone
+                if(search.compareToIgnoreCase(list.get(mid).getPhone()) < 0) {
+                    high = mid - 1;
+                } else if(search.equalsIgnoreCase(list.get(mid).getPhone())) {
+                    // Found a match, add to results and remove from list to find all occurrences
+                    results.add(list.get(mid));
+                    list.remove(mid);
+                    // Reset search bounds
+                    low = 0;
+                    high = list.size() - 1;
+                } else {
+                    low = mid + 1;
+                }
+            } else if(sortBy.equalsIgnoreCase("address")) {
+                // Search by address
+                if(search.compareToIgnoreCase(list.get(mid).getAddress()) < 0) {
+                    high = mid - 1;
+                } else if(search.equalsIgnoreCase(list.get(mid).getAddress())) {
+                    // Found a match, add to results and remove from list to find all occurrences
+                    results.add(list.get(mid));
+                    list.remove(mid);
+                    // Reset search bounds
+                    low = 0;
+                    high = list.size() - 1;
+                } else {
+                    low = mid + 1;
+                }
+            } else if(sortBy.equalsIgnoreCase("join date")) {
+                // Search by join date
+                if(search.compareToIgnoreCase(list.get(mid).getJoinDate()) < 0) {
+                    high = mid - 1;
+                } else if(search.equalsIgnoreCase(list.get(mid).getJoinDate())) {
+                    // Found a match, add to results and remove from list to find all occurrences
+                    results.add(list.get(mid));
+                    list.remove(mid);
+                    // Reset search bounds
+                    low = 0;
+                    high = list.size() - 1;
+                } else {
+                    low = mid + 1;
+                }
+            } else {
+                // Search by ID
+                if(search.compareToIgnoreCase(list.get(mid).getID()) < 0) {
+                    high = mid - 1;
+                } else if(search.equalsIgnoreCase(list.get(mid).getID())) {
                     // Found a match, add to results and remove from list
                     results.add(list.get(mid));
                     list.remove(mid);
