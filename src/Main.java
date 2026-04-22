@@ -234,8 +234,53 @@ public class Main {
                 if(bookResults.size() == 0) {
                     System.out.println("Failed to find book.");
                 } else {
-                    books.remove(bookResults.get(0));
-                    System.out.println("Book removed successfully!");
+                    System.out.print("Are you sure you want to remove " + bookResults.get(0).getTitle() + " by " + bookResults.get(0).getAuthor() + "? (Y/N): ");
+                    String confirmation = scnr.nextLine();
+                    if(confirmation.equalsIgnoreCase("Y")) {
+                        books.remove(bookResults.get(0));
+                        System.out.println("Book removed successfully!");
+                    } else {
+                        System.out.println("Book removal cancelled.");
+                    }
+                }
+                currSceneID = 0;
+            } else if(currSceneID == 17) {
+                System.out.println(currScene.getPrompt());
+                scnr.nextLine();
+                System.out.print("ID: ");
+                String id = scnr.nextLine();
+                System.out.print("Name (First Last): ");
+                String name = scnr.nextLine();
+                System.out.print("Email: ");
+                String email = scnr.nextLine();
+                System.out.print("Phone: ");
+                String phone = scnr.nextLine();
+                System.out.print("Address: ");
+                String address = scnr.nextLine();
+                System.out.print("Membership type: ");
+                String membershipType = scnr.nextLine();
+                System.out.print("Join date (e.g. 1 Jan 2020): ");
+                String joinDate = scnr.nextLine();
+                Member newMember = new Member(id, name, email, phone, address, membershipType, joinDate);
+                members.add(newMember);
+                System.out.println("Member added successfully!");
+                currSceneID = 0;
+            } else if(currSceneID == 18) {
+                System.out.print(currScene.getPrompt());
+                scnr.nextLine();
+                sortBy = "ID";
+                memberResults = memberBinarySearch(sortBy, scnr.nextLine(), memberInsertionSort(sortBy, members));
+                if(memberResults.size() == 0) {
+                    System.out.println("Failed to find member.");
+                } else {
+                    System.out.print("Are you sure you want to remove " + memberResults.get(0).getName() + "? (Y/N): ");
+                    String confirmation = scnr.nextLine();
+                    if(confirmation.equalsIgnoreCase("Y")) {
+                        members.remove(memberResults.get(0));
+                        System.out.println("Member removed successfully!");
+                    } else {
+                        System.out.println("Member removal cancelled.");
+                    }
                 }
                 currSceneID = 0;
             } else {
