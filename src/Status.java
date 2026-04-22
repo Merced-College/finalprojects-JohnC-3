@@ -1,13 +1,15 @@
 package src;
 // John Chiero
-// 4/20/2026
-// Status class
+// 4/21/2026
+// Status class - Tracks the current state of a book (Available, Checked out, Reserved)
 
 public class Status {
     private String availability;
     private Member member;
     private String borrowDate;
     private String dueDate;
+
+    // Dummy member used when no one has the book
     private Member noMember = new Member(null, null, null, null, null, null, null);
 
     public Status() {
@@ -17,41 +19,21 @@ public class Status {
         this.dueDate = null;
     }
 
-    public String getAvailability() {
-        return availability;
-    }
+    public String getAvailability() { return availability; }
+    public void setAvailability(String availability) { this.availability = availability; }
 
-    public void setAvailability(String availability) {
-        this.availability = availability;
-    }
+    public Member getMember() { return member; }
+    public void setMember(Member member) { this.member = member; }
 
-    public Member getMember() {
-        return member;
-    }
+    public String getBorrowDate() { return borrowDate; }
+    public void setBorrowDate(String borrowDate) { this.borrowDate = borrowDate; }
 
-    public void setMember(Member member) {
-        this.member = member;
-    }
-
-    public String getBorrowDate() {
-        return borrowDate;
-    }
-
-    public void setBorrowDate(String borrowDate) {
-        this.borrowDate = borrowDate;
-    }
-
-    public String getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(String dueDate) {
-        this.dueDate = dueDate;
-    }
+    public String getDueDate() { return dueDate; }
+    public void setDueDate(String dueDate) { this.dueDate = dueDate; }
 
     @Override
     public String toString() {
-        if(availability.equals("Available")) {
+        if (availability.equals("Available")) {
             return availability;
         } else {
             return availability + ", " + member.getName() + ", " + borrowDate + ", " + dueDate;

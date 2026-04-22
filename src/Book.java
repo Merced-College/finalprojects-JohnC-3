@@ -1,7 +1,7 @@
 package src;
 // John Chiero
 // 4/21/2026
-// Book class
+// Book class - Represents a single book in the library
 
 import java.util.*;
 
@@ -12,10 +12,11 @@ public class Book {
     private int publicationYear;
     private String genre;
     private String language;
-    private Status status;
-    private Queue<Member> queue;
+    private Status status;           // Current availability + checkout info
+    private Queue<Member> queue;     // Queue of members waiting to reserve this book
 
-    public Book(String title, Author author, String isbn, int publicationYear, String genre, String language) {
+    public Book(String title, Author author, String isbn, int publicationYear,
+                String genre, String language) {
         this.title = title;
         this.author = author;
         this.isbn = isbn;
@@ -26,57 +27,26 @@ public class Book {
         this.queue = new LinkedList<>();
     }
 
-    public String getTitle() {
-        return title;
-    }
+    // Getters and Setters
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public Author getAuthor() { return author; }
+    public void setAuthor(Author author) { this.author = author; }
 
-    public Author getAuthor() {
-        return author;
-    }
+    public String getISBN() { return isbn; }
+    public void setISBN(String isbn) { this.isbn = isbn; }
 
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
+    public int getPublicationYear() { return publicationYear; }
+    public void setPublicationYear(int publicationYear) { this.publicationYear = publicationYear; }
 
-    public String getISBN() {
-        return isbn;
-    }
+    public String getGenre() { return genre; }
+    public void setGenre(String genre) { this.genre = genre; }
 
-    public void setISBN(String isbn) {
-        this.isbn = isbn;
-    }
+    public String getLanguage() { return language; }
+    public void setLanguage(String language) { this.language = language; }
 
-    public int getPublicationYear() {
-        return publicationYear;
-    }
-
-    public void setPublicationYear(int publicationYear) {
-        this.publicationYear = publicationYear;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
+    public Status getStatus() { return status; }
 
     public void setStatus(String availability, Member member, String borrowDate, String dueDate) {
         this.status.setAvailability(availability);
@@ -85,20 +55,13 @@ public class Book {
         this.status.setDueDate(dueDate);
     }
 
-    public Queue<Member> getQueue() {
-        return queue;
-    }
-
-    public void addToQueue(Member member) {
-        this.queue.add(member);
-    }
-
-    public void removeFromQueue() {
-        this.queue.poll();
-    }
+    public Queue<Member> getQueue() { return queue; }
+    public void addToQueue(Member member) { this.queue.add(member); }
+    public void removeFromQueue() { this.queue.poll(); }
 
     @Override
     public String toString() {
-        return title + ", " + author + ", " + isbn + ", " + publicationYear + ", " + genre + ", " + language + ", " + status;
+        return title + ", " + author + ", " + isbn + ", " + publicationYear +
+               ", " + genre + ", " + language + ", " + status;
     }
 }
