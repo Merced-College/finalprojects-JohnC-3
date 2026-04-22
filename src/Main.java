@@ -205,6 +205,39 @@ public class Main {
                     System.out.println("Book reserved/queued successfully!");
                 }
                 currSceneID = 0;
+            } else if(currSceneID == 15) {
+                System.out.println(currScene.getPrompt());
+                scnr.nextLine();
+                System.out.print("Title: ");
+                String title = scnr.nextLine();
+                System.out.print("Author (First Last): ");
+                Author author = new Author(scnr.next(), scnr.next(), null);
+                scnr.nextLine();
+                System.out.print("ISBN: ");
+                String isbn = scnr.nextLine();
+                System.out.print("Publication Year: ");
+                int publicationYear = scnr.nextInt();
+                scnr.nextLine();
+                System.out.print("Genre: ");
+                String genre = scnr.nextLine();
+                System.out.print("Language: ");
+                String language = scnr.nextLine();
+                Book newBook = new Book(title, author, isbn, publicationYear, genre, language);
+                books.add(newBook);
+                System.out.println("Book added successfully!");
+                currSceneID = 0;
+            } else if(currSceneID == 16) {
+                System.out.print(currScene.getPrompt());
+                scnr.nextLine();
+                sortBy = "ISBN";
+                bookResults = bookBinarySearch(sortBy, scnr.nextLine(), bookInsertionSort(sortBy, books));
+                if(bookResults.size() == 0) {
+                    System.out.println("Failed to find book.");
+                } else {
+                    books.remove(bookResults.get(0));
+                    System.out.println("Book removed successfully!");
+                }
+                currSceneID = 0;
             } else {
                 System.out.println(currScene.getPrompt());
                 for(int i = 0; i < currScene.getChoices().length; i++) {
