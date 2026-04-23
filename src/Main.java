@@ -1,6 +1,6 @@
 package src;
 // John Chiero
-// 4/21/2026
+// 4/22/2026
 // Main class - Entry point of the Library Management System
 /**
  * All code written by John Chiero or recycled from previous assignments, with some minor help from GitHub Copilot and Grok.
@@ -381,7 +381,7 @@ public class Main {
     // ===================================================================
 
     /**
-     * Loads book data from a CSV file and populates the books list.
+     * Loads book data from a text file and populates the books list.
      * Skips header and empty lines.
      */
     private static void loadBooks(String filename) {
@@ -424,7 +424,7 @@ public class Main {
     }
 
     /**
-     * Loads member data from a CSV file and populates the members list.
+     * Loads member data from a text file and populates the members list.
      */
     private static void loadMembers(String filename) {
         try (Scanner scnr = new Scanner(new File(filename))) {
@@ -455,7 +455,7 @@ public class Main {
     }
 
     /**
-     * Loads scene (menu) definitions from a CSV file.
+     * Loads scene (menu) definitions from a text file.
      * Each scene defines prompt, choices, and next scene IDs.
      */
     private static void loadScenes(String filename) {
